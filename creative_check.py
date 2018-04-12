@@ -3,8 +3,12 @@ import os
 import glob
 
 for filename in glob.glob('*.jpg'):
+
     image=Image.open(filename)
-    print(str(image.filename) + ' format is => ' + str(image.mode))
-    if image.mode == 'CMYK':
+    path = os.path.abspath(filename)
+
+    if image.mode == 'CMYK': 
+        image.convert('RGB').save(path)
         print(str(image.filename) + ' format is now => ' + str(image.mode))
-        image = image.convert('RGB').save(path_to_image)
+    else:
+        print(str(image.filename) + ' is good. format is => ' + str(image.mode))
